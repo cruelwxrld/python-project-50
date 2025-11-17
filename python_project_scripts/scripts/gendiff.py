@@ -1,6 +1,6 @@
 import argparse
 import json
-import os
+from python_project_scripts import generate_diff
 
 def main():
     parser = argparse.ArgumentParser(
@@ -20,8 +20,7 @@ def main():
     file1 = json.load(open(file1_path))
     file2 = json.load(open(file2_path))
 
-    print(f'file1: {file1}')
-    print(f'file2: {file2}')
+    print(generate_diff(file1, file2))
 
 if __name__ == "__main__":
     main()
