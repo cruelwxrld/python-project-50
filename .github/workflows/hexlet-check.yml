@@ -38,3 +38,5 @@ jobs:
           args: >
             -Dsonar.projectKey=cruelwxrld_python-project-50
             -Dsonar.organization=cruelwxrld
+            -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonart.tests=tests
