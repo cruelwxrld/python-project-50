@@ -1,5 +1,6 @@
 from python_project_scripts import generate_diff
 
+
 def test_1():
     file1 = {'name': "John", 'age': 35}
     file2 = {'name': "John", 'age': 37}
