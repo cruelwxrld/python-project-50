@@ -21,3 +21,32 @@ dev = [
 
 [project.scripts]
 gendiff = 'python_project_scripts.scripts.gendiff:main'
+
+[tool.pytest.ini_options]
+addopts = [
+    "--cov=python_project_scripts",
+    "--cov-report=xml",
+    "--cov-report=term-missing",
+    "-v"
+]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+
+[tool.coverage.run]
+source = ["python_project_scripts"]
+branch = true
+omit = [
+    "*/tests/*",
+    "*/test_*",
+    "*/__pycache__/*"
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+]
