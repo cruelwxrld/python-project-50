@@ -2,6 +2,7 @@
 [![Actions Status](https://github.com/cruelwxrld/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/cruelwxrld/python-project-50/actions)
 [![hexlet-check](https://github.com/cruelwxrld/python-project-50/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/cruelwxrld/python-project-50/actions/workflows/hexlet-check.yml)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=cruelwxrld_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=cruelwxrld_python-project-50)
+
 [![SonarQube Cloud](https://sonarcloud.io/images/project_badges/sonarcloud-dark.svg)](https://sonarcloud.io/summary/new_code?id=cruelwxrld_python-project-50)
 
 
