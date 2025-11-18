@@ -39,4 +39,5 @@ jobs:
             -Dsonar.projectKey=cruelwxrld_python-project-50
             -Dsonar.organization=cruelwxrld
             -Dsonar.python.coverage.reportPaths=coverage.xml
-            -Dsonart.tests=tests
+            -Dsonar.tests=tests
+            -Dsonar.python.version=3.12
