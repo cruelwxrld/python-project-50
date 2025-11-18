@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
@@ -29,30 +31,6 @@ jobs:
         run: |
           make test
           make test-coverage
-      - name: Check coverage.xml content
-        run: |
-          echo "=== Coverage file info ==="
-          ls -la coverage.xml
-          echo "=== File size ==="
-          wc -l coverage.xml
-          echo "=== First 20 lines ==="
-          head -20 coverage.xml
-          echo "=== Check if contains coverage data ==="
-          grep -c "coverage" coverage.xml || echo "No coverage tag found"
-          grep -c "class name" coverage.xml || echo "No class data found"
-      - name: Run tests with explicit coverage
-        run: |
-          uv run pytest \
-            --cov=python_project_scripts \
-            --cov-report=xml \
-            --cov-report=term-missing \
-            -v
-
-      - name: Generate detailed coverage report
-        run: |
-          uv run coverage html
-          echo "=== Coverage summary ==="
-          uv run coverage report
       - name: SonarQubeScan
         uses: SonarSource/sonarqube-scan-action@v6
         env:
@@ -63,5 +41,6 @@ jobs:
             -Dsonar.projectKey=cruelwxrld_python-project-50
             -Dsonar.organization=cruelwxrld
             -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.sources=.
             -Dsonar.tests=tests
             -Dsonar.python.version=3.12
