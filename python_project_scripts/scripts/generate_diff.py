@@ -1,5 +1,6 @@
 import json
 
+
 def generate_diff(first_file: json, second_file: json) -> str:
     result = []
 
