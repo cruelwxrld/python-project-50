@@ -29,6 +29,17 @@ jobs:
         run: |
           make test
           make test-coverage
+      - name: Check coverage.xml content
+        run: |
+          echo "=== Coverage file info ==="
+          ls -la coverage.xml
+          echo "=== File size ==="
+          wc -l coverage.xml
+          echo "=== First 20 lines ==="
+          head -20 coverage.xml
+          echo "=== Check if contains coverage data ==="
+          grep -c "coverage" coverage.xml || echo "No coverage tag found"
+          grep -c "class name" coverage.xml || echo "No class data found"
       - name: SonarQubeScan
         uses: SonarSource/sonarqube-scan-action@v6
         env:
