@@ -34,4 +34,3 @@ jobs:
           args: >
             -Dsonar.projectKey=cruelwxrld_python-project-50
             -Dsonar.organization=cruelwxrld
-            -Dsonar.analysis.autodetection.disabled=true
