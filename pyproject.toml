@@ -20,4 +20,4 @@ dev = [
 ]
 
 [project.scripts]
-gendiff = 'python_project_scripts.scripts.gendiff:main'
+gendiff = 'python_project_scripts.gendiff:main'

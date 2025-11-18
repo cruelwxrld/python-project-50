@@ -1,7 +1,5 @@
-import json
 
-
-def generate_diff(first_file: json, second_file: json) -> str:
+def generate_diff(first_file, second_file) -> str:
     result = []
 
     all_keys = sorted(set(first_file.keys()) | set(second_file.keys()))

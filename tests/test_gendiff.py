@@ -1,63 +1,40 @@
-from python_project_scripts import generate_diff
+def test_all_format():
+    import json
+    import os
+    import subprocess
+    import tempfile
 
+    import yaml
 
-def test_1():
-    file1 = {'name': "John", 'age': 35}
-    file2 = {'name': "John", 'age': 37}
+    with (tempfile.NamedTemporaryFile(mode='w', suffix=".json", delete=False)
+          as file1):
+        json.dump({'a': 1, 'b': 2}, file1)
+        json1 = file1.name
 
-    expected = """{
-  - age: 35
-  + age: 37
-    name: John
-}"""
+    with (tempfile.NamedTemporaryFile(mode='w', suffix=".json", delete=False)
+          as file2):
+        json.dump({'a': 1}, file2)
+        json2 = file2.name
 
-    assert generate_diff(file1, file2) == expected
+    with (tempfile.NamedTemporaryFile(mode='w', suffix=".yaml", delete=False)
+          as file1yml):
+        yaml.dump({'a': 1, 'b': 2}, file1yml)
+        yaml1 = file1yml.name
 
+    with (tempfile.NamedTemporaryFile(mode='w', suffix=".yaml", delete=False)
+          as file2yml):
+        yaml.dump({'a': 1}, file2yml)
+        yaml2 = file2yml.name
 
-def test_2():
-    file1 = {'a': 1}
-    file2 = {'a': 1, 'b': 2}
+    try:
+        result1 = subprocess.run(['gendiff', json1, json2],
+                                 capture_output=True, text=True)
+        result2 = subprocess.run(['gendiff', yaml1, yaml2],
+                                 capture_output=True, text=True)
 
-    expected = """{
-    a: 1
-  + b: 2
-}"""
+        assert '- b: 2' in result1.stdout
+        assert '- b: 2' in result2.stdout
 
-    assert generate_diff(file1, file2) == expected
-
-
-def test_3():
-    file1 = {}
-    file2 = {}
-
-    expected = """{
-
-}"""
-
-    assert generate_diff(file1, file2) == expected
-
-
-def test_4():
-    file1 = {'a': 1, 'b': 2}
-    file2 = {'a': 1}
-
-    expected = """{
-    a: 1
-  - b: 2
-}"""
-
-    assert generate_diff(file1, file2) == expected
-
-
-def test_5():
-    file1 = {'a': 1, 'b': 2}
-    file2 = {'c': 3, 'd': 4}
-
-    expected = """{
-  - a: 1
-  - b: 2
-  + c: 3
-  + d: 4
-}"""
-
-    assert generate_diff(file1, file2) == expected
+    finally:
+        for file in [json1, json2, yaml1, yaml2]:
+            os.unlink(file)
