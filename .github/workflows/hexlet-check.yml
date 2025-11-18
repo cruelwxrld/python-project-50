@@ -44,3 +44,4 @@ jobs:
             -Dsonar.sources=.
             -Dsonar.tests=tests
             -Dsonar.python.version=3.12
+            -Dsonar.coverage.exclusions=tests/**,test_*
